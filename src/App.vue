@@ -18,6 +18,7 @@
 </template>
 
 <script>
+const axios = require("axios");
 import Mapbox from "mapbox-gl";
 import {
   MglMap,
@@ -149,6 +150,12 @@ export default {
                 " </div>"
             )
             .addTo(this.map);
+          axios
+            .get("http://192.168.2.57:4567/parcel/", {
+              params: { long: e.lngLat.lng, lat: e.lngLat.lat }
+            })
+            // eslint-disable-next-line no-console
+            .then(data => console.log(data));
         }.bind(this)
       );
       return;
